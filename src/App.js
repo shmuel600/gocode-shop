@@ -7,7 +7,12 @@ import data from './data';
 const App = () => {
   const [products, setProducts] = useState(data);
   function filterCategory(event) {
-    const filtered = data.filter((value) => value.category === event.target.value);
+    const filtered = data.filter((value) => {
+      if (event.target.value === "/")
+        return value.category;
+      else
+        return value.category === event.target.value;
+    });
     console.log(filtered);
     setProducts(filtered);
   }
