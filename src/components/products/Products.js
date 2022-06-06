@@ -1,5 +1,5 @@
-import '../products/Products.css';
-import Product from '../product/Product'
+import './Products.css';
+import Product from '../Product/Product'
 
 const Products = ({ products }) => {
     return (
@@ -18,8 +18,7 @@ const Products = ({ products }) => {
                         ratingCount={product.rating.count}
                     />
                 )
-            })
-            }
+            })}
         </section>
     );
 }

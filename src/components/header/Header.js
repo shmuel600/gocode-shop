@@ -1,21 +1,29 @@
-import '../header/Header.css';
+import './Header.css';
 
-const Header = () => {
+const Header = ({ data, filterCategory }) => {
+    const categories = data
+        .map(p => p.category)
+        .filter(
+            (value, index, array) =>
+                array.indexOf(value) === index
+        );
     return (
         <nav className="product-filter">
             <h1>Jackets</h1>
             <div className="sort">
                 <div className="collection-sort">
                     <label>Filter by:</label>
-                    <select>
+                    <select onChange={filterCategory}>
                         <option value="/">All Jackets</option>
-                        <option value="/">2016</option>
-                        <option value="/">jacket</option>
-                        <option value="/">Jackets</option>
-                        <option value="/">layers</option>
-                        <option value="/">Obermeyer</option>
-                        <option value="/">Roxy</option>
-                        <option value="/">womens</option>
+                        {categories.map(
+                            category =>
+                                <option
+                                    key={category}
+                                    value={category}
+                                >
+                                    {category}
+                                </option>
+                        )}
                     </select>
                 </div>
                 <div className="collection-sort">

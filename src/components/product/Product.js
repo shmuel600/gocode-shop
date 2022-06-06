@@ -1,4 +1,4 @@
-import '../product/Product.css';
+import './Product.css';
 
 const Product = ({ image, title, price }) => {
     return (
