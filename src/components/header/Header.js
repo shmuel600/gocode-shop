@@ -1,14 +1,14 @@
 import './Header.css';
 
-const Header = ({ categories, filterCategory }) => {
+const Header = ({ categories, filterByCategory }) => {
     return (
         <nav className="product-filter">
             <h1>Jackets</h1>
             <div className="sort">
                 <div className="collection-sort">
                     <label>Filter by:</label>
-                    <select onChange={filterCategory}>
-                        <option value="/">All Categories</option>
+                    <select onChange={filterByCategory}>
+                        <option value="All">All Products</option>
                         {categories.map(
                             category =>
                                 <option

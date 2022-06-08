@@ -13,19 +13,18 @@ const App = () => {
       (value, index, array) =>
         array.indexOf(value) === index
     );
-  function filterCategory(event) {
+  const filterByCategory = (event) => {
     const filtered = data.filter((item) =>
-      event.target.value === "/" ? item : event.target.value === item.category
+      event.target.value === "All" ? item : event.target.value === item.category
     );
     setProducts(filtered);
   }
   return (
     <div className="App">
-      <Header categories={categories} filterCategory={filterCategory} />
+      <Header categories={categories} filterByCategory={filterByCategory} />
       <ToggleText />
       <Products products={products} />
     </div>)
 }
 
 export default App;
-
