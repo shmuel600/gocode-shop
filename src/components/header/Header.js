@@ -7,7 +7,7 @@ const Header = ({ categories, filterByCategory }) => {
             <div className="sort">
                 <div className="collection-sort">
                     <label>Filter by:</label>
-                    <select onChange={filterByCategory}>
+                    <select onChange={(event) => filterByCategory(event.target.value)}>
                         <option value="All">All Products</option>
                         {categories.map(
                             category =>
