@@ -1,12 +1,6 @@
 import './Header.css';
 
-const Header = ({ data, filterCategory }) => {
-    const categories = data
-        .map(p => p.category)
-        .filter(
-            (value, index, array) =>
-                array.indexOf(value) === index
-        );
+const Header = ({ categories, filterCategory }) => {
     return (
         <nav className="product-filter">
             <h1>Jackets</h1>
@@ -14,7 +8,7 @@ const Header = ({ data, filterCategory }) => {
                 <div className="collection-sort">
                     <label>Filter by:</label>
                     <select onChange={filterCategory}>
-                        <option value="/">All Jackets</option>
+                        <option value="/">All Categories</option>
                         {categories.map(
                             category =>
                                 <option

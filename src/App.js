@@ -7,19 +7,21 @@ import data from './data';
 
 const App = () => {
   const [products, setProducts] = useState(data);
+  const categories = data
+    .map(p => p.category)
+    .filter(
+      (value, index, array) =>
+        array.indexOf(value) === index
+    );
   function filterCategory(event) {
-    const filtered = data.filter((value) => {
-      if (event.target.value === "/")
-        return value.category;
-      else
-        return value.category === event.target.value;
-    });
-    console.log(filtered);
+    const filtered = data.filter((item) =>
+      event.target.value === "/" ? item : event.target.value === item.category
+    );
     setProducts(filtered);
   }
   return (
     <div className="App">
-      <Header data={data} filterCategory={filterCategory} />
+      <Header categories={categories} filterCategory={filterCategory} />
       <ToggleText />
       <Products products={products} />
     </div>)
