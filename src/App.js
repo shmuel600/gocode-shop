@@ -13,9 +13,9 @@ const App = () => {
         array.indexOf(value) === index
     );
   const [products, setProducts] = useState(data);
-  const filterByCategory = (category) => {
+  const filterByCategory = (selected) => {
     const filtered = data.filter((item) =>
-      category === "All" ? item : category === item.category
+      selected === "All" ? item : item.category === selected
     );
     setProducts(filtered);
   };
