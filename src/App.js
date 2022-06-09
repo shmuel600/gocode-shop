@@ -14,10 +14,11 @@ const App = () => {
     );
   const [products, setProducts] = useState(data);
   const filterByCategory = (selected) => {
-    const filtered = data.filter((item) =>
-      selected === "All" ? item : item.category === selected
-    );
-    setProducts(filtered);
+    const filter =
+      selected === "All" ?
+        data :
+        data.filter((item) => item.category === selected);
+    setProducts(filter);
   };
   return (
     <div className="App">
