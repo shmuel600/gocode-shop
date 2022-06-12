@@ -3,58 +3,68 @@ import './App.css';
 import Header from './components/Header/Header';
 import Products from './components/Products/Products';
 import ToggleText from './components/ToggleText/ToggleText';
+import Cart from './components/Cart/Cart';
+import CartContext from './contexts/CartContext';
 
 const App = () => {
-  const [originalProducts, setOriginalProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All")
   const [afterFirstRender, setAfterFirstRender] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+  const [cartProducts, setCartProducts] = useState([])
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((content) => content.json())
-      .then((products) => {
-        setOriginalProducts(products);
-        setFilteredProducts(products);
-        setAfterFirstRender(true);
-      })
-      .catch((error) => {
-        console.log("Fetch request failed");
-      });
+    fetchProducts();
   }, []);
 
-  const categories = originalProducts
-    .map(p => p.category)
-    .filter(
-      (value, index, array) =>
-        array.indexOf(value) === index
-    );
-
-  const filterByCategory = (selected) => {
-    const filter =
-      selected === "All" ?
-        originalProducts :
-        originalProducts.filter((item) => item.category === selected);
-    setFilteredProducts(filter);
-  };
+  const fetchProducts = () => {
+    setAfterFirstRender(false);
+    setSelectedCategory("All");
+    fetch("https://fakestoreapi.com/products")
+      .then((content) => content.json())
+      .then((fetchedProducts) => {
+        setProducts(fetchedProducts);
+        setAfterFirstRender(true);
+      });
+  }
 
   return (
-    <div className="App">
-      {afterFirstRender ?
-        <>
-          <Header
-            categories={categories}
-            filterByCategory={filterByCategory}
-          />
-          <ToggleText />
-          < Products
-            products={filteredProducts}
-          />
-        </> :
-        <div className="flex">
-          <div className="loader"></div>
-        </div>
-      }
-    </div>
+    <CartContext.Provider value={{ cartProducts, setCartProducts, openCart, setOpenCart }}>
+      <div className="App">
+        {openCart && <Cart products={products} />}
+        <button onClick={() => setOpenCart(!openCart)}>
+          {openCart ? "Close Cart" : "Open Cart"}
+        </button>
+        <Header
+          categories={
+            products
+              .map(product => product.category)
+              .filter(
+                (value, index, array) =>
+                  array.indexOf(value) === index
+              )
+          }
+          setSelectedCategory={setSelectedCategory}
+          reloadProducts={fetchProducts}
+          afterFirstRender={afterFirstRender}
+        />
+        <ToggleText />
+        {afterFirstRender ?
+          <>
+            < Products
+              products={
+                selectedCategory === "All" ?
+                  products :
+                  products.filter((item) => item.category === selectedCategory)
+              }
+            />
+          </> :
+          <div className="flex">
+            <div className="loader"></div>
+          </div>
+        }
+      </div>
+    </CartContext.Provider>
   )
 }
 
