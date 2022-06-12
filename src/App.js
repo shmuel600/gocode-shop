@@ -7,6 +7,7 @@ import ToggleText from './components/ToggleText/ToggleText';
 const App = () => {
   const [originalProducts, setOriginalProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [afterFirstRender, setAfterFirstRender] = useState(false);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -14,6 +15,7 @@ const App = () => {
       .then((array) => {
         setOriginalProducts(array);
         setFilteredProducts(array);
+        setAfterFirstRender(true);
       });
   }, []);
 
@@ -39,7 +41,7 @@ const App = () => {
         filterByCategory={filterByCategory}
       />
       <ToggleText />
-      {originalProducts.length > 0 ?
+      {afterFirstRender ?
         < Products
           products={filteredProducts}
         /> :
