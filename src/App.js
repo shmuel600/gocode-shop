@@ -5,21 +5,21 @@ import Products from './components/Products/Products';
 import ToggleText from './components/ToggleText/ToggleText';
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [products, setProducts] = useState(data);
+  const [originalProducts, setOriginalProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [afterFirstRender, setAfterFirstRender] = useState(false);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((content) => content.json())
       .then((array) => {
-        setData(array);
-        setProducts(array);
+        setOriginalProducts(array);
+        setFilteredProducts(array);
         setAfterFirstRender(true);
       });
   }, []);
 
-  const categories = data
+  const categories = originalProducts
     .map(p => p.category)
     .filter(
       (value, index, array) =>
@@ -29,9 +29,9 @@ const App = () => {
   const filterByCategory = (selected) => {
     const filter =
       selected === "All" ?
-        data :
-        data.filter((item) => item.category === selected);
-    setProducts(filter);
+        originalProducts :
+        originalProducts.filter((item) => item.category === selected);
+    setFilteredProducts(filter);
   };
 
   return (
@@ -43,7 +43,7 @@ const App = () => {
       <ToggleText />
       {afterFirstRender ?
         < Products
-          products={products}
+          products={filteredProducts}
         /> :
         <div className="flex">
           <div className="loader"></div>
