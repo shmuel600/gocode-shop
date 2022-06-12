@@ -11,7 +11,7 @@ const Cart = () => {
                 <button onClick={() => setOpenCart(!openCart)}>
                     Close Cart
                 </button>
-                total: ${total}
+                <h4>Total: ${total}</h4>
                 {cartProducts.length > 0 && cartProducts.map((product) => {
                     return (
                         <div key={cartProducts.indexOf(product)} className="product-card">
