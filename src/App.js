@@ -16,6 +16,9 @@ const App = () => {
         setOriginalProducts(products);
         setFilteredProducts(products);
         setAfterFirstRender(true);
+      })
+      .catch((error) => {
+        console.log("Fetch request failed");
       });
   }, []);
 
@@ -36,19 +39,20 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header
-        categories={categories}
-        filterByCategory={filterByCategory}
-      />
-      <ToggleText />
       {afterFirstRender ?
-        < Products
-          products={filteredProducts}
-        /> :
+        <>
+          <Header
+            categories={categories}
+            filterByCategory={filterByCategory}
+          />
+          <ToggleText />
+          < Products
+            products={filteredProducts}
+          />
+        </> :
         <div className="flex">
           <div className="loader"></div>
         </div>
-
       }
     </div>
   )
