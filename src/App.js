@@ -12,9 +12,9 @@ const App = () => {
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((content) => content.json())
-      .then((array) => {
-        setOriginalProducts(array);
-        setFilteredProducts(array);
+      .then((products) => {
+        setOriginalProducts(products);
+        setFilteredProducts(products);
         setAfterFirstRender(true);
       });
   }, []);
