@@ -4,7 +4,6 @@ import CartContext from "../../contexts/CartContext";
 
 const CartProduct = ({ product }) => {
     const { cartProducts, setCartProducts, setOpenCart } = useContext(CartContext);
-    console.log(product.title + " amount: " + product.amount);
 
     const removeAll = () => {
         product.amount !== 1 && remove();
