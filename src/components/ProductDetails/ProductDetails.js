@@ -56,7 +56,6 @@ const ProductDetails = () => {
                         <div className="content">
                             <h1>{product.title}</h1>
                             <h3>{product.description}</h3>
-                            <h5>${product.price}</h5>
                             <h6>{product.category}</h6>
                             <br />
                             <h6>
@@ -64,6 +63,7 @@ const ProductDetails = () => {
                                 <br />
                                 {product.rating.count} users have voted
                             </h6>
+                            <h5>${product.price}</h5>
                             <div className="btn">
                                 <button onClick={(e) => {
                                     e.preventDefault();
