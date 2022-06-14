@@ -4,15 +4,13 @@
   align-items: space-around;
   color: black;
   margin: 0.5%;
-  padding: 1%;
+  padding: 3%;
   flex: 1 16%;
   background-color: #fff;
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   text-decoration: none;
-  max-width: 232px;
-  min-width: 232px;
-  min-height: 350px;
+  z-index: 3;
 }
 
 button {
@@ -28,6 +26,10 @@ button {
 }
 
 .card {
+  padding: 1%;
+  max-width: 232px;
+  min-width: 232px;
+  min-height: 350px;
   position: relative;
   /* display: flex; */
   /* align-items: flex-end; */
@@ -65,7 +67,7 @@ button {
   transition: transform calc(var(--d) * 2) var(--e);
 }
 
-.content {
+.card-content {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -85,13 +87,13 @@ button {
   line-height: 1.2;
 } */
 
-.description {
+.card-description {
   font-size: 1.5rem;
   /* box-shadow: 10px 10px 8px 10px rgba(57, 57, 57, 0.3); */
   /* line-height: 1.35; */
 }
 
-.btn {
+.card-btn {
   text-align: center;
   cursor: pointer;
   margin-top: 1.5rem;
@@ -107,7 +109,7 @@ button {
 /* .btn:hover {
   background-color: #0d0d0d;
 } */
-.btn:focus {
+.card-btn:focus {
   outline: 1px dashed yellow;
   outline-offset: 3px;
 }
@@ -117,7 +119,7 @@ button {
     transform: translateY(0);
   }
 
-  .content > *:not(.title) {
+  .card-content > *:not(.title) {
     opacity: 0;
     transform: translateY(1rem);
     transition: transform var(--d) var(--e), opacity var(--d) var(--e);

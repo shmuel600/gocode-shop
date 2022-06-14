@@ -9,7 +9,7 @@
     background-color: rgba(144, 144, 144, 0.8);
     color: white;
     transition: 2s each-in-out;
-    z-index: 4;
+    z-index: 60;
   }
 
   .cart {
@@ -28,7 +28,7 @@
     display: flex;
     background-color: rgb(62, 68, 78);
     border: 1px solid rgb(48, 48, 48);
-    z-index: 6;
+    z-index: 62;
     font-weight: 400;
     transform: scale(1.2);
   }
