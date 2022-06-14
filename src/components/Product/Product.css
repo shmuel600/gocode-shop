@@ -13,8 +13,26 @@
   z-index: 3;
 }
 
+input {
+  padding: 3px 0px 3px 0px;
+  text-align: center;
+  font-size: 14px;
+}
+
 button {
+  font-weight: 600;
   z-index: 10;
+  background-color: rgb(72,149,255);
+  /* border: 1px solid rgb(29, 31, 34); */
+  border: transparent;
+  padding: 5px 10px 5px 10px;
+  margin: 2px;
+  color: white;
+}
+
+button:hover {
+  color: whitesmoke;
+  background-color: rgb(106,169,255);
 }
 
 /* start import */
