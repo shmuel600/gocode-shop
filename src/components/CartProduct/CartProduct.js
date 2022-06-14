@@ -27,7 +27,7 @@ const CartProduct = ({ product }) => {
     }
 
     return (
-        <div className="product-card-details">
+        <div className="product-card">
             <div>
                 <img src={product.image} className="cart-product-image" alt="" />
                 <h5>{product.title}</h5>

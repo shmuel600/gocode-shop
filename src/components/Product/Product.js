@@ -27,9 +27,9 @@ const Product = ({ product }) => {
         < Link className="product-card card" to={`/products${product.id}`} >
             <div className="product-image">
                 <img src={product.image} alt="" />
-                <div className="card-content">
-                    <div className="card-description">More Details</div>
-                    <div className="card-btn">
+                <div className="content">
+                    <div className="description">More Details</div>
+                    <div className="btn">
                         <button onClick={(e) => {
                             e.preventDefault();
                             remove();
