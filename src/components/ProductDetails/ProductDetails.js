@@ -64,7 +64,7 @@ const ProductDetails = () => {
                                 <br />
                                 {product.rating.count} users have voted
                             </h6>
-                            <div>
+                            <div className="btn">
                                 <button onClick={(e) => {
                                     e.preventDefault();
                                     remove();

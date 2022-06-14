@@ -19,7 +19,7 @@ input {
   font-size: 14px;
 }
 
-button {
+.btn button {
   font-weight: 600;
   z-index: 10;
   background-color: rgb(72,149,255);
@@ -30,7 +30,7 @@ button {
   color: white;
 }
 
-button:hover {
+.btn button:hover {
   color: whitesmoke;
   background-color: rgb(106,169,255);
 }
