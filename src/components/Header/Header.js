@@ -18,7 +18,7 @@ const Header = ({ categories, setSelectedCategory, reloadProducts, afterFirstRen
                     <h4>In Cart: {inCart}</h4>
                 </div>
             </button>
-            <br />
+            {/* <br /> */}
             <div className='header'>
                 <nav className="product-filter">
                     <h1>
@@ -64,7 +64,7 @@ const Header = ({ categories, setSelectedCategory, reloadProducts, afterFirstRen
             </div>
             <hr />
             <div className='menu'>
-                <button className='header-btn'><Link to={`/`} className='header-btn'>Home</Link></button>
+                <Link to={`/`} className='header-btn'><button className='header-btn'>Home</button></Link>
                 <button onClick={reloadProducts} className='header-btn' >
                     Reload Products
                 </button>

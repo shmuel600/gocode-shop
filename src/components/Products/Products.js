@@ -3,7 +3,7 @@ import Product from '../Product/Product'
 
 const Products = ({ products }) => {
     return (
-        <div>
+        <div className='products-container'>
             <section className="products">
                 {products.map((product) => {
                     if (isNaN(product.amount)) {

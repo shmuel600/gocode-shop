@@ -56,7 +56,9 @@ const App = () => {
       );
 
   return (
-    <CartContext.Provider value={{ renderToggle, setRenderToggle, products, cartProducts, setCartProducts, openCart, setOpenCart, inCart, total }}>
+    <CartContext.Provider value={{
+      renderToggle, setRenderToggle, products, cartProducts, setCartProducts, openCart, setOpenCart, inCart, total
+    }}>
       <div className="App">
         <Header
           categories={categories}
