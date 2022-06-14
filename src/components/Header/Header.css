@@ -5,7 +5,9 @@ body {
 }
 
 .header {
-    background-color: rgb(62, 68, 78);
+    /* background-color: rgb(62, 68, 78); */
+    background-color: rgb(72,149,255);
+    /* background-color: rgb(106,169,255); */
     color: white;
     padding: 5px 30px 5px 30px;
     margin: 0;
@@ -26,6 +28,7 @@ body {
     border: transparent;
     padding: 0.5%;
     color: gray;
+    /* color: rgb(62, 68, 78); */
     text-decoration: none;
     cursor: pointer;
     text-transform: none;
@@ -45,6 +48,8 @@ body {
 
 .header-btn:hover {
     color: rgb(195, 195, 195);
+    /* color: rgb(29, 31, 34); */
+    /* color: gray; */
 }
 
 .product-filter {
@@ -70,7 +75,9 @@ body {
 
 label {
     /* color: #666; */
-    color: darkgray;
+    /* color: darkgray; */
+    /* color: rgb(29, 31, 34); */
+    color: rgb(62,68,78);
     font-size: 11px;
     font-weight: 500;
     line-height: 2em;
@@ -79,7 +86,7 @@ label {
 
 h1 {
     /* text-transform: uppercase; */
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 800;
     flex: 1;
 }

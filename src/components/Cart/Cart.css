@@ -6,8 +6,8 @@
     max-width: 30%;
     margin: 0;
     background-color: rgba(48, 48, 48, 0.7);
-    background-color: rgba(144, 144, 144, 0.8);
-    color: white;
+    /* background-color: rgba(144, 144, 144, 0.8); */
+    color: whitesmoke;
     transition: 2s each-in-out;
     z-index: 60;
   }
@@ -21,13 +21,14 @@
     /* font-size: 11px; */
     min-width: 10%;
     max-height: 6%;
-    color: white;
+    color: whitesmoke;
     position: fixed;
     left: 3%;
     bottom: 4%;
     display: flex;
     background-color: rgb(62, 68, 78);
-    border: 1px solid rgb(48, 48, 48);
+    /* background-color: rgb(29, 31, 34); */
+    /* border: 1px solid rgb(48, 48, 48); */
     z-index: 62;
     font-weight: 400;
     transform: scale(1.2);
@@ -36,6 +37,7 @@
   .cart-icon:hover{
     transform: scale(1.4);
     transition: 0.2s ease-in-out;
+    /* color: darkgray; */
   }
 
   .cart-image {

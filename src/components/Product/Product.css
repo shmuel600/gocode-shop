@@ -156,7 +156,9 @@ button {
 /* end import */
 
 section> .product-card {
-  background-image: linear-gradient(to bottom, white 55%, rgb(29, 31, 34) 45%);
+  /* background-image: linear-gradient(to bottom, white 55%, rgb(29, 31, 34) 45%); */
+  background-image: linear-gradient(to bottom, white 60%, rgb(62,68,78) 40%);
+  /* background-image: linear-gradient(to bottom, white 55%, rgb(72,149,255) 45%); */
 }
 section > .product-card:hover {
   transform: scale(0.94);
@@ -188,11 +190,16 @@ h5 {
 }
 
 section h5 {
-  color: rgb(222, 222, 222);
+  /* color: rgb(222, 222, 222); */
+  color: whitesmoke;
+  /* color: rgb(29, 31, 34); */
+  /* color: rgb(62,68,78); */
 }
   
 h6 {
-    color: gray;
+    /* color: gray; */
+    color: darkgray;
+    /* color: rgb(62,68,78); */
     font-size: 14px;
   }
 
