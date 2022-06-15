@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../../contexts/CartContext";
 import './Product.css';
@@ -28,6 +28,8 @@ const Product = ({ product }) => {
         setRenderToggle(!renderToggle);
     }
 
+    const focusedCard = useRef(null);
+    const unfocus = () => focusedCard.blur;
     return (
         <>
             {/* < Link to={`/products${product.id}`} onClick={() => setLoadFilters(false)}>
@@ -51,7 +53,13 @@ const Product = ({ product }) => {
                 </Card>
             </Link> */}
 
-            < Link to={`/products${product.id}`} className="product-card card" onClick={() => setLoadFilters(false)}>
+            < Link
+                to={`/products${product.id}`}
+                className="product-card card"
+                onClick={() => setLoadFilters(false)}
+                onMouseOut={(e) => e.target.blur()}
+                ref={focusedCard}
+            >
                 <div className="product-image">
                     <img src={product.image} alt="" />
                     <div className="content">

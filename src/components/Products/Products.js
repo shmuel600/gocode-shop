@@ -1,7 +1,11 @@
+import { useContext } from 'react';
+import CartContext from '../../contexts/CartContext';
 import Product from '../Product/Product';
 import './Products.css';
 
 const Products = ({ products }) => {
+    const { setLoadFilters } = useContext(CartContext);
+    setLoadFilters(true);
     return (
         <div className='products products-container'>
             {products.map((product) => {
