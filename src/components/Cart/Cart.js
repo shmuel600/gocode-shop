@@ -4,9 +4,13 @@ import CartProduct from "../CartProduct/CartProduct";
 import './Cart.css';
 
 const Cart = () => {
-    const { cartProducts, setCartProducts } = useContext(CartContext);
+    const { openCart, setOpenCart, cartProducts, setCartProducts } = useContext(CartContext);
     return (
-        <div className="cart-container">
+        <div
+            className="cart-container"
+            onMouseLeave={() =>
+                setOpenCart(!openCart)}
+        >
             <div className="cart">
                 {cartProducts.length > 0 &&
                     cartProducts.map((product) => {

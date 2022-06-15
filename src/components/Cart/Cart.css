@@ -1,5 +1,7 @@
 .cart-container {
     position: fixed;
+    overflow-y: scroll;
+    scroll-behavior: auto;
     left: 0;
     min-height: 100%;
     min-width: 400px;
@@ -10,6 +12,22 @@
     color: whitesmoke;
     transition: 2s each-in-out;
     z-index: 60;
+  }
+
+  ::-webkit-scrollbar {
+    width: 18px;
+    background: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(54,59,68);
+  }
+  .cart-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(72,149,255);
+    border-radius: 30px;
+    border: 3px solid rgb(54,59,68);
   }
 
   .cart {
@@ -52,7 +70,7 @@
     display: flex;
     justify-content: center;
     position: fixed;
-    left: 200px;
+    left: 220px;
     min-width: 50px;
     min-height: 40px;
   }
