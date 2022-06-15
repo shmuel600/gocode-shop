@@ -19,12 +19,13 @@
 
   .cart-icon {
     /* font-size: 11px; */
-    min-width: 10%;
-    max-height: 6%;
+    min-width: 100px;
+    max-height: 40px;
+    min-height: 40px;
     color: whitesmoke;
     position: fixed;
-    left: 3%;
-    bottom: 4%;
+    left: 30px;
+    bottom: 30px;
     display: flex;
     background-color: rgb(62, 68, 78);
     /* background-color: rgb(29, 31, 34); */
@@ -32,6 +33,13 @@
     z-index: 62;
     font-weight: 400;
     transform: scale(1.2);
+    text-align: left;
+    border-radius: 15px;
+    border: transparent;
+    padding: 0.5%;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: none;
   }
 
   .cart-icon:hover{
@@ -43,9 +51,10 @@
   .cart > .cart-icon {
     display: flex;
     justify-content: center;
-    left: 16%;
-    min-width: 5%;
-    min-height: 6%;
+    position: fixed;
+    left: 200px;
+    min-width: 50px;
+    min-height: 40px;
   }
 
   .cart-image {

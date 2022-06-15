@@ -11,7 +11,7 @@ const Header = ({ categories, setSelectedCategory, reloadProducts, afterFirstRen
         <>
             {renderToggle && <></>}
             {openCart && <Cart products={products} />}
-            <button onClick={() => setOpenCart(!openCart)} className='header-btn cart-icon' >
+            <button onClick={() => setOpenCart(!openCart)} className='cart-icon' >
                 <div className="cart-image"></div>
                 <div className="cart-text">
                     <h4>Total: ${total.toFixed(2)}</h4>

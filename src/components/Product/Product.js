@@ -24,7 +24,12 @@ const Product = ({ product }) => {
     }
 
     return (
-        < Link className="product-card card" to={`/products${product.id}`} >
+        < Link
+            to={`/products${product.id}`}
+            className="product-card card"
+            onMouseLeave={() =>
+                setRenderToggle(!renderToggle)}
+        >
             <div className="product-image">
                 <img src={product.image} alt="" />
                 <div className="content">

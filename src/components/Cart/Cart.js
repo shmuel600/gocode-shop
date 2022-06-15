@@ -19,7 +19,7 @@ const Cart = () => {
                     })
                 }
                 <button
-                    className='header-btn cart-icon'
+                    className='cart-icon'
                     onClick={() =>
                         setCartProducts(cartProducts.filter((value) => false))}
                 >
