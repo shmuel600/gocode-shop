@@ -1,3 +1,4 @@
+import Rating from '@mui/material/Rating';
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CartContext from "../../contexts/CartContext";
@@ -10,6 +11,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState();
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
+    const [rating, setRating] = useState(1);
 
     useEffect(() => {
         const fetchProducts = () => {
@@ -17,6 +19,7 @@ const ProductDetails = () => {
                 .then((content) => content.json())
                 .then((fetchedProduct) => {
                     setProduct(fetchedProduct);
+                    setRating(fetchedProduct.rating.rate);
                     setLoading(false);
                     fetchedProduct.amount = 1;
                 })
@@ -64,6 +67,16 @@ const ProductDetails = () => {
                                 <br />
                                 {product.rating.count} users have voted
                             </h6>
+
+                            <Rating
+                                readOnly
+                                value={rating}
+                                precision={0.1}
+                                onChange={(event, newValue) => {
+                                    setRating(newValue);
+                                }}
+                            />
+
                             <h5>${product.price}</h5>
                             <div className="btn">
                                 <button onClick={(e) => {
