@@ -69,7 +69,7 @@ const Product = ({ product }) => {
                                 {product.title}
                             </Typography>
                             <Typography variant="body2" color="text.secondary" className='price'>
-                                {product.price}
+                                ₪{product.price}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
