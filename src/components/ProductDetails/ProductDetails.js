@@ -22,6 +22,7 @@ const ProductDetails = () => {
                 })
                 .catch((error) => {
                     console.log("Server unavailable, try again later");
+                    setProduct("Server unavailable, reload products and try again");
                     setLoading(true);
                 });
         }

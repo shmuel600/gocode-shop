@@ -28,9 +28,10 @@ const App = () => {
         setProducts(fetchedProducts);
         setAfterFirstRender(true);
       })
-      .catch((error) =>
-        console.log("Server unavailable, try again later")
-      );
+      .catch((error) => {
+        setProducts(["Server unavailable, reload products and try again"]);
+        console.log("Server unavailable, try again later");
+      });
   }
 
   const inCart = cartProducts

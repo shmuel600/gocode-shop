@@ -27,18 +27,20 @@ const CartProduct = ({ product }) => {
     }
 
     return (
-        <div className="product-card">
-            <div>
-                <img src={product.image} className="cart-product-image" alt="" />
-                <h5>{product.title}</h5>
-                <h6>${product.price}</h6>
-                <br />
-            </div>
-            <div>
-                <button onClick={() => { remove(); }}>-</button>
-                <button onClick={() => { add(); }}>+</button>
-                <input value={product.amount} readOnly />
-                <button onClick={() => { removeAll(); }} className="product-img">Remove All From Cart</button>
+        <div className="cart-product">
+            <div className="product-card">
+                <div>
+                    <img src={product.image} className="cart-product-image" alt="" />
+                    <h5>{product.title}</h5>
+                    <h6>${product.price}</h6>
+                    <br />
+                </div>
+                <div className="btn">
+                    <button onClick={() => { remove(); }}>-</button>
+                    <button onClick={() => { add(); }}>+</button>
+                    <input value={product.amount} readOnly />
+                    <button onClick={() => { removeAll(); }} className="product-img">Remove From Cart</button>
+                </div>
             </div>
         </div>
     )

@@ -40,6 +40,14 @@
     /* color: darkgray; */
   }
 
+  .cart > .cart-icon {
+    display: flex;
+    justify-content: center;
+    left: 16%;
+    min-width: 5%;
+    min-height: 6%;
+  }
+
   .cart-image {
     background-image: url('/public/images/shopping-cart.png');
     background-size: contain;

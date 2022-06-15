@@ -4,7 +4,7 @@ import CartProduct from "../CartProduct/CartProduct";
 import CartContext from "../../contexts/CartContext";
 
 const Cart = () => {
-    const { cartProducts } = useContext(CartContext);
+    const { cartProducts, setCartProducts } = useContext(CartContext);
     return (
         <div className="cart-container">
             <div className="cart">
@@ -18,8 +18,17 @@ const Cart = () => {
                         )
                     })
                 }
+                <button
+                    className='header-btn cart-icon'
+                    onClick={() =>
+                        setCartProducts(cartProducts.filter((value) => false))}
+                >
+                    <div className="cart-text">
+                        <h4>Clear All</h4>
+                    </div>
+                </button>
             </div>
-        </div>
+        </div >
     )
 }
 
