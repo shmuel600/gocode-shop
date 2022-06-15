@@ -59,7 +59,7 @@ const App = () => {
       );
 
   const filterByPrice = (min, max) =>
-    setProducts(originalProducts.filter((product) => product.price > min && product.price < max));
+    setProducts(originalProducts.filter((product) => product.price >= min && product.price <= max));
 
   return (
     <CartContext.Provider value={{

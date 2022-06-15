@@ -111,6 +111,7 @@ input {
 
 .card .content .description {
   font-size: 1.5rem;
+  margin-top: 15vh;
   /* box-shadow: 10px 10px 8px 10px rgba(57, 57, 57, 0.3); */
   /* line-height: 1.35; */
 }
@@ -191,7 +192,6 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30vh;
 }
 
 .product-image img {
