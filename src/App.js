@@ -8,28 +8,30 @@ import Products from './components/Products/Products';
 import CartContext from './contexts/CartContext';
 
 const App = () => {
-  const [products, setProducts] = useState([]);
+  const [originalProducts, setOriginalProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [afterFirstRender, setAfterFirstRender] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [openCart, setOpenCart] = useState(false);
   const [renderToggle, setRenderToggle] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
+  const [loadFilters, setLoadFilters] = useState(true);
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = () => {
-    setAfterFirstRender(false);
+    setLoading(false);
     setSelectedCategory("All");
     fetch("https://fakestoreapi.com/products")
       .then((content) => content.json())
       .then((fetchedProducts) => {
+        setOriginalProducts(fetchedProducts);
         setProducts(fetchedProducts);
-        setAfterFirstRender(true);
+        setLoading(false);
       })
       .catch((error) => {
-        setProducts(["Server unavailable, reload products and try again"]);
         console.log("Server unavailable, try again later");
       });
   }
@@ -42,7 +44,7 @@ const App = () => {
     .map((product) => product.price * product.amount)
     .reduce((partialSum, a) => partialSum + a, 0);
 
-  const categories = products
+  const categories = originalProducts
     .map(product => product.category)
     .filter(
       (value, index, array) =>
@@ -56,20 +58,25 @@ const App = () => {
         (item) => item.category === selectedCategory
       );
 
+  const filterByPrice = (min, max) =>
+    setProducts(originalProducts.filter((product) => product.price > min && product.price < max));
+
   return (
     <CartContext.Provider value={{
-      renderToggle, setRenderToggle, products, cartProducts, setCartProducts, openCart, setOpenCart, inCart, total
+      renderToggle, setRenderToggle, products: originalProducts, setProducts: setOriginalProducts, cartProducts, setCartProducts, openCart, setOpenCart, inCart, total, loadFilters, setLoadFilters
     }}>
       <div className="App">
         <Header
           categories={categories}
           setSelectedCategory={setSelectedCategory}
           reloadProducts={fetchProducts}
-          afterFirstRender={afterFirstRender}
+          loadFilters={!loading && loadFilters}
+          loading={loading}
+          filterByPrice={filterByPrice}
         />
         <Routes>
           <Route path={`/`} element={
-            afterFirstRender ?
+            !loading ?
               <Products products={filter} /> :
               <Loader />
           } />

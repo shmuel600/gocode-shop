@@ -1,3 +1,4 @@
+import Slider from '@mui/material/Slider';
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
 import CartContext from "../../contexts/CartContext";
@@ -5,8 +6,11 @@ import Cart from '../Cart/Cart';
 import ToggleText from '../ToggleText/ToggleText';
 import './Header.css';
 
-const Header = ({ categories, setSelectedCategory, reloadProducts, afterFirstRender }) => {
-    const { renderToggle, products, openCart, setOpenCart, inCart, total } = useContext(CartContext);
+const Header = ({ categories, setSelectedCategory, reloadProducts, loadFilters, loading, filterByPrice }) => {
+    const { renderToggle, products, openCart, setOpenCart, inCart, total, setLoadFilters } = useContext(CartContext);
+    const minPrice = Math.min(...products.map((product) => product.price));
+    const maxPrice = Math.max(...products.map((product) => product.price));
+
     return (
         <>
             {renderToggle && <></>}
@@ -30,38 +34,55 @@ const Header = ({ categories, setSelectedCategory, reloadProducts, afterFirstRen
                 <nav className="product-filter">
                     <h1>
                         GoCode Shop
-                        <br />
                     </h1>
 
-                    {afterFirstRender &&
-                        <div className="sort">
-                            <div className="collection-sort">
-                                <label>Filter by:</label>
-                                <select onChange={(event) => setSelectedCategory(event.target.value)}>
-                                    <option value="All">All Products</option>
-                                    {categories.map(
-                                        category =>
-                                            <option
-                                                key={category}
-                                                value={category}
-                                            >
-                                                {category}
-                                            </option>
-                                    )}
-                                </select>
+                    {loadFilters &&
+                        <div>
+                            <div className="sort">
+                                <div className="collection-sort">
+                                    <label>Filter by:</label>
+                                    <select onChange={(event) => setSelectedCategory(event.target.value)}>
+                                        <option value="All">All Products</option>
+                                        {categories.map(
+                                            category =>
+                                                <option
+                                                    key={category}
+                                                    value={category}
+                                                >
+                                                    {category}
+                                                </option>
+                                        )}
+                                    </select>
+                                </div>
+                                <div className="collection-sort">
+                                    <label>Sort by:</label>
+                                    <select>
+                                        <option value="/">Featured</option>
+                                        <option value="/">Best Selling</option>
+                                        <option value="/">Alphabetically, A-Z</option>
+                                        <option value="/">Alphabetically, Z-A</option>
+                                        <option value="/">Price, low to high</option>
+                                        <option value="/">Price, high to low</option>
+                                        <option value="/">Date, new to old</option>
+                                        <option value="/">Date, old to new</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div className="collection-sort">
-                                <label>Sort by:</label>
-                                <select>
-                                    <option value="/">Featured</option>
-                                    <option value="/">Best Selling</option>
-                                    <option value="/">Alphabetically, A-Z</option>
-                                    <option value="/">Alphabetically, Z-A</option>
-                                    <option value="/">Price, low to high</option>
-                                    <option value="/">Price, high to low</option>
-                                    <option value="/">Date, new to old</option>
-                                    <option value="/">Date, old to new</option>
-                                </select>
+                            <br />
+                            <div>
+                                <label>Price range:</label>
+                                {!loading && <Slider
+                                    className="slider"
+                                    getAriaLabel={() => 'Price range'}
+                                    defaultValue={[minPrice, maxPrice]}
+                                    onChange={(event) => {
+                                        filterByPrice(event.target.value[0], event.target.value[1]);
+                                    }}
+                                    valueLabelDisplay="auto"
+                                    size='small'
+                                    min={minPrice}
+                                    max={maxPrice}
+                                />}
                             </div>
                         </div>
                     }
@@ -71,7 +92,9 @@ const Header = ({ categories, setSelectedCategory, reloadProducts, afterFirstRen
             </div>
             <hr />
             <div className='menu'>
-                <Link to={`/`} className='header-btn'><button className='header-btn'>Home</button></Link>
+                <Link to={`/`} className='header-btn'>
+                    <button className='header-btn' onClick={() => setLoadFilters(true)}>Home</button>
+                </Link>
                 <button onClick={reloadProducts} className='header-btn' >
                     Reload Products
                 </button>

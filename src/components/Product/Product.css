@@ -13,6 +13,10 @@
   z-index: 3;
 }
 
+.product-container section {
+  min-width: 100%;
+}
+
 input {
   padding: 3px 0px 3px 0px;
   text-align: center;
@@ -173,12 +177,12 @@ input {
 }
 /* end import */
 
-section> .product-card {
+.products-container .product-card {
   /* background-image: linear-gradient(to bottom, white 55%, rgb(29, 31, 34) 45%); */
   background-image: linear-gradient(to bottom, white 60%, rgb(62,68,78) 40%);
   /* background-image: linear-gradient(to bottom, white 55%, rgb(72,149,255) 45%); */
 }
-section > .product-card:hover {
+.products-container .product-card:hover {
   transform: scale(0.94);
   transition: 0.3s ease-in-out;
 }

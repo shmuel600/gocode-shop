@@ -4,7 +4,7 @@ import CartContext from "../../contexts/CartContext";
 import './Product.css';
 
 const Product = ({ product }) => {
-    const { renderToggle, setRenderToggle, cartProducts, setCartProducts } = useContext(CartContext);
+    const { renderToggle, setRenderToggle, cartProducts, setCartProducts, setLoadFilters } = useContext(CartContext);
     const [howMany, setHowMany] = useState(1);
 
     const remove = () => {
@@ -24,10 +24,7 @@ const Product = ({ product }) => {
     }
 
     return (
-        < Link
-            to={`/products${product.id}`}
-            className="product-card card"
-        >
+        < Link to={`/products${product.id}`} className="product-card card" onClick={() => setLoadFilters(false)}>
             <div className="product-image">
                 <img src={product.image} alt="" />
                 <div className="content">
@@ -56,32 +53,8 @@ const Product = ({ product }) => {
                 <h6>${product.price}</h6>
                 <br />
             </div>
-            {/* <div className="btn">
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    remove();
-                }}>↓</button>
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    add();
-                }}>↑</button>
-                <input value={howMany} readOnly />
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    addAll();
-                }} >
-                    Add To Cart
-                </button>
-            </div> */}
         </Link >
     );
 }
 
 export default Product;
-
-// <div class="card">
-//     <div class="content">
-//         <h2 class="title"> </h2>
-//         <p class="description"> </p>
-//     </div>
-// </div> 
