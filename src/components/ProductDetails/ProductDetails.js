@@ -1,8 +1,8 @@
-import CartContext from "../../contexts/CartContext";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CartContext from "../../contexts/CartContext";
 import Loader from "../Loader/Loader";
-import './ProductDetails.css'
+import './ProductDetails.css';
 
 const ProductDetails = () => {
     const { renderToggle, setRenderToggle, cartProducts, setCartProducts } = useContext(CartContext);

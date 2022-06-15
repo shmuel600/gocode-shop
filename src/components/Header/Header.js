@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import './Header.css';
 import { useContext } from 'react';
+import { Link } from "react-router-dom";
 import CartContext from "../../contexts/CartContext";
 import Cart from '../Cart/Cart';
 import ToggleText from '../ToggleText/ToggleText';
+import './Header.css';
 
 const Header = ({ categories, setSelectedCategory, reloadProducts, afterFirstRender }) => {
     const { renderToggle, products, openCart, setOpenCart, inCart, total } = useContext(CartContext);

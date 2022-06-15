@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import './Product.css';
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import CartContext from "../../contexts/CartContext";
+import './Product.css';
 
 const Product = ({ product }) => {
     const { renderToggle, setRenderToggle, cartProducts, setCartProducts } = useContext(CartContext);

@@ -1,11 +1,11 @@
-import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import { Route, Routes } from "react-router-dom";
 import './App.css';
 import Header from './components/Header/Header';
-import Products from './components/Products/Products';
 import Loader from './components/Loader/Loader';
+import ProductDetails from './components/ProductDetails/ProductDetails';
+import Products from './components/Products/Products';
 import CartContext from './contexts/CartContext';
-import ProductDetails from './components/ProductDetails/ProductDetails'
 
 const App = () => {
   const [products, setProducts] = useState([]);

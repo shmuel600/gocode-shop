@@ -1,5 +1,5 @@
+import Product from '../Product/Product';
 import './Products.css';
-import Product from '../Product/Product'
 
 const Products = ({ products }) => {
     return (
