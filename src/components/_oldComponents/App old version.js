@@ -18,7 +18,7 @@ const App = () => {
   const [renderToggle, setRenderToggle] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
   const [loadFilters, setLoadFilters] = useState(true);
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetchProducts();
@@ -35,6 +35,7 @@ const App = () => {
         setLoading(false);
       })
       .catch((error) => {
+        console.log("Server unavailable, trying second server");
         fetch("https://gocode-bituach-yashir.glitch.me/products")
           .then((content) => content.json())
           .then((fetchedProducts) => {
