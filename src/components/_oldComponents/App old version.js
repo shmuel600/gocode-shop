@@ -35,7 +35,6 @@ const App = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.log("Server unavailable, trying second server");
         fetch("https://gocode-bituach-yashir.glitch.me/products")
           .then((content) => content.json())
           .then((fetchedProducts) => {
@@ -44,8 +43,18 @@ const App = () => {
             setLoading(false);
           })
           .catch((error) => {
-            console.log("Server unavailable, try again later");
-          })
+            console.log("Server unavailable, trying third server");
+            fetch("https://bedecked-stone-turret.glitch.me/products")
+              .then((content) => content.json())
+              .then((fetchedProducts) => {
+                setOriginalProducts(fetchedProducts);
+                setProducts(fetchedProducts);
+                setLoading(false);
+              })
+              .catch((error) => {
+                console.log("Server unavailable, try again later");
+              })
+          });
       });
   }
 
