@@ -2,7 +2,7 @@ import Slider from '@mui/material/Slider';
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
 import CartContext from "../../contexts/CartContext";
-import Cart from '../_oldComponents/Cart/Cart';
+import Cart from '../Cart/Cart';
 import ToggleText from '../ToggleText/ToggleText';
 import './Header.css';
 
