@@ -2,7 +2,7 @@
     position: fixed;
     overflow-y: scroll;
     scroll-behavior: auto;
-    left: 0;
+    left: -30%;
     min-height: 100%;
     min-width: 400px;
     max-width: 30%;
@@ -10,8 +10,22 @@
     background-color: rgba(48, 48, 48, 0.7);
     /* background-color: rgba(144, 144, 144, 0.8); */
     color: whitesmoke;
-    transition: 2s each-in-out;
+    /* transition: 2s each-in-out; */
     z-index: 60;
+    animation: slidein 0.2s both;
+    /* animation-delay: 2s; */
+  }
+
+  @keyframes slidein {
+    0% { left: -30%; }
+  }
+
+  @keyframes slidein {
+    50% { left: -5%; }
+  }
+
+  @keyframes slidein {
+    100% { left: 0; }
   }
 
   ::-webkit-scrollbar {
