@@ -2,9 +2,12 @@ import Slider from '@mui/material/Slider';
 import { useContext } from 'react';
 import { Link } from "react-router-dom";
 import CartContext from "../../contexts/CartContext";
-import Cart from '../Cart/Cart';
+import Cart from '../_oldComponents/Cart/Cart';
 import ToggleText from '../ToggleText/ToggleText';
 import './Header.css';
+
+// import Cart from '../Cart/Cart';
+
 
 const Header = ({ categories, setSelectedCategory, reloadProducts, loadFilters, loading, filterByPrice }) => {
     const { renderToggle, products, openCart, setOpenCart, inCart, total, setLoadFilters } = useContext(CartContext);

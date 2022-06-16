@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 import './App.css';
-import Header from './components/Header/Header';
-import Loader from './components/Loader/Loader';
-import ProductDetails from './components/_oldComponents/ProductDetails/ProductDetails';
-import Products from './components/_oldComponents/Products/Products';
-import CartContext from './contexts/CartContext';
+import Header from '../Header/Header';
+import Loader from '../Loader/Loader';
+import ProductDetails from './ProductDetails/ProductDetails';
+import Products from './Products/Products';
+import CartContext from '../../contexts/CartContext';
 
 // import ProductDetails from './components/ProductDetails/ProductDetails';
 // import Products from './components/Products/Products';
