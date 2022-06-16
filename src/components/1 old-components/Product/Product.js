@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import CartContext from "../../contexts/CartContext";
+import CartContext from "../../../contexts/CartContext";
 import './Product.css';
 
 const Product = ({ product }) => {
