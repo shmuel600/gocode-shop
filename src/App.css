@@ -102,6 +102,7 @@ body {
   line-height: 1;
   font-family: 'Lato', sans-serif;
   overflow-x: hidden;
+  background-color: #3d3f47 !important;
 }
 ol,
 ul {
@@ -157,10 +158,26 @@ body {
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
-body {
+/* body {
   margin: 0 auto;
-  /* width: 90%; */
   max-width: 1240px;
   font-family: "Roboto", sans-serif;
-  background-color: #f6f6f6;
+  background-color: #3d3f47;
+  overflow-y: scroll;
+} */
+
+::-webkit-scrollbar {
+  /* width: 18px; */
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: rgb(54,59,68);
+}
+.cart-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 10px;
+  border: 3px solid rgb(54,59,68);
 }

@@ -1,118 +1,65 @@
-import { CardActionArea } from '@mui/material';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { useContext, useState } from "react";
+import { Box } from "@mui/system";
+import { useContext } from 'react';
 import { Link } from "react-router-dom";
-import CartContext from "../../contexts/CartContext";
-import './Product.css';
+import Context from '../../contexts/Context';
 
 const Product = ({ product }) => {
-    const { renderToggle, setRenderToggle, cartProducts, setCartProducts, setLoadFilters } = useContext(CartContext);
-    const [howMany, setHowMany] = useState(1);
-
-    const remove = () => {
-        product.amount > 1 && product.amount--;
-        howMany > 1 && setHowMany(howMany - 1);
-    }
-    const add = () => {
-        product.amount++;
-        howMany < 10 && setHowMany(howMany + 1);
-    }
-    const addAll = () => {
-        !cartProducts.includes(product) ?
-            setCartProducts([...cartProducts, product])
-            : product.amount++;
-        setHowMany(1);
-        setRenderToggle(!renderToggle);
-    }
+    const { cartProductsQuantities, changeQuantities, setOnMainPage } = useContext(Context);
 
     return (
         <>
-            < Link
-                to={`/products${product.id}`}
-                className="disable-link"
-                onClick={() => setLoadFilters(false)}
-                onMouseOut={(e) => e.target.blur()}
-            >
-                <Card sx={{ margin: 0.5, minWidth: 260, maxWidth: 260, minHeight: 370, maxHeight: 370, borderRadius: 10 }} className="card">
-                    <div className="content">
-                        <div className="description">More Details</div>
-                        <div className="btn">
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                remove();
-                            }}>↓</button>
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                add();
-                            }}>↑</button>
-                            <input value={howMany} readOnly />
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                addAll();
-                            }} >
-                                Add To Cart
-                            </button>
-                        </div>
-                    </div>
-                    <CardActionArea className="product-image">
-                        <CardMedia className="media"
-                            component="img"
-                            height="140"
-                            image={product.image}
-                            alt="image not found"
-                        />
-                        <CardContent className="product-info card-content">
-                            <Typography gutterBottom variant="h5" component="div" className='title'>
-                                {product.title}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary" className='price'>
-                                ₪{product.price}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            </Link>
-
-            {/* < Link
-                to={`/products${product.id}`}
-                className="product-card card card-size"
-                onClick={() => setLoadFilters(false)}
-                onMouseOut={(e) => e.target.blur()}
-            >
-                <div className="product-image">
-                    <img src={product.image} alt="" />
-                    <div className="content">
-                        <div className="description">More Details</div>
-                        <div className="btn">
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                remove();
-                            }}>↓</button>
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                add();
-                            }}>↑</button>
-                            <input value={howMany} readOnly />
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                addAll();
-                            }} >
-                                Add To Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="product-info">
-                    <h5>{product.title}</h5>
-                    <h6>${product.price}</h6>
-                    <br />
-                </div>
-            </Link > */}
+            <Card sx={{ display: 'flex', alignItems: 'center', width: 400, height: 220, margin: '0.5%' }}>
+                <CardMedia
+                    component="img"
+                    height="140"
+                    sx={{ maxWidth: '30%', maxHeight: '170px', objectFit: 'contain', margin: '10px' }}
+                    image={product.image}
+                    alt=""
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: 260, height: 220, backgroundColor: '#eeeeee' }}>
+                    <CardContent sx={{ flex: '1 0 auto' }}>
+                        <Typography component="div" variant="subtitle2">
+                            {product.title}
+                        </Typography>
+                        <Typography variant="subtitle2" color="text.secondary" component="div">
+                            {product.category}
+                        </Typography>
+                    </CardContent>
+                    <Link to={`products/${product.id}`} style={{ textDecoration: 'none' }} onClick={() => setOnMainPage(false)}>
+                        <Typography variant="subtitle2" color="text.secondary" component="div" sx={{ pl: 17, pb: 1 }}>
+                            More Details
+                        </Typography>
+                    </Link>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', pl: 1, pb: 1 }}>
+                        <Typography component="div" variant="subtitle3">
+                            ₪{product.price}
+                        </Typography>
+                        <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                            <Button
+                                onClick={() => { changeQuantities(product.id - 1, "-") }}
+                            >
+                                -
+                            </Button>
+                            <Button sx={{ backgroundColor: 'transparent' }} disabled>
+                                {cartProductsQuantities[product.id - 1]}
+                            </Button>
+                            <Button
+                                onClick={() => { changeQuantities(product.id - 1, "+") }}
+                            >
+                                +
+                            </Button>
+                        </ButtonGroup>
+                    </Box>
+                </Box>
+            </Card>
         </>
-    );
+    )
 }
 
 export default Product;

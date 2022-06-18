@@ -1,36 +1,38 @@
+import { CssBaseline } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Route, Routes } from "react-router-dom";
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Cart from './components/Cart/Cart';
 import Header from './components/Header/Header';
 import Loader from './components/Loader/Loader';
 import ProductDetails from './components/ProductDetails/ProductDetails';
-import Products from './components/Products/Products';
-import CartContext from './contexts/CartContext';
-
-// import ProductDetails from './components/ProductDetails/ProductDetails';
-// import Products from './components/Products/Products';
+import Shop from './components/Shop/Shop';
+import Context from './contexts/Context';
+import './App.css';
 
 const App = () => {
-  const [originalProducts, setOriginalProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
   const [loading, setLoading] = useState(true);
-  const [openCart, setOpenCart] = useState(false);
-  const [renderToggle, setRenderToggle] = useState(false);
-  const [cartProducts, setCartProducts] = useState([]);
-  const [loadFilters, setLoadFilters] = useState(true);
+  const [onMainPage, setOnMainPage] = useState(true);
+  const [sourceProducts, setSourceProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [cartProductsQuantities, setCartProductsQuantities] = useState([]);
+  const [openCart, setOpenCart] = useState(false);
+  const [inCartQuantity, setInCartQuantity] = useState(0);
+  const [totalCartCost, setTotalCartCost] = useState(0);
+  const [priceRange, setPriceRange] = useState([])
 
   useEffect(() => {
     fetchProducts();
   }, []);
-
   const fetchProducts = () => {
-    setLoading(false);
-    setSelectedCategory("All");
     fetch("https://fakestoreapi.com/products")
       .then((content) => content.json())
       .then((fetchedProducts) => {
-        setOriginalProducts(fetchedProducts);
+        setPriceRange([[
+          Math.min(...fetchedProducts.map((product) => product.price)),
+          Math.max(...fetchedProducts.map((product) => product.price))
+        ]]);
+        setCartProductsQuantities(fetchedProducts.map((product) => 0));
+        setSourceProducts(fetchedProducts);
         setProducts(fetchedProducts);
         setLoading(false);
       })
@@ -39,7 +41,12 @@ const App = () => {
         fetch("https://gocode-bituach-yashir.glitch.me/products")
           .then((content) => content.json())
           .then((fetchedProducts) => {
-            setOriginalProducts(fetchedProducts);
+            setPriceRange([[
+              Math.min(...fetchedProducts.map((product) => product.price)),
+              Math.max(...fetchedProducts.map((product) => product.price))
+            ]]);
+            setCartProductsQuantities(fetchedProducts.map((product) => 0));
+            setSourceProducts(fetchedProducts);
             setProducts(fetchedProducts);
             setLoading(false);
           })
@@ -48,7 +55,12 @@ const App = () => {
             fetch("https://bedecked-stone-turret.glitch.me/products")
               .then((content) => content.json())
               .then((fetchedProducts) => {
-                setOriginalProducts(fetchedProducts);
+                setPriceRange([[
+                  Math.min(...fetchedProducts.map((product) => product.price)),
+                  Math.max(...fetchedProducts.map((product) => product.price))
+                ]]);
+                setCartProductsQuantities(fetchedProducts.map((product) => 0));
+                setSourceProducts(fetchedProducts);
                 setProducts(fetchedProducts);
                 setLoading(false);
               })
@@ -58,55 +70,95 @@ const App = () => {
           });
       });
   }
-
-  const inCart = cartProducts
-    .map((product) => product.amount)
-    .reduce((partialSum, a) => partialSum + a, 0);
-
-  const total = cartProducts
-    .map((product) => product.price * product.amount)
-    .reduce((partialSum, a) => partialSum + a, 0);
-
-  const categories = originalProducts
-    .map(product => product.category)
-    .filter(
-      (value, index, array) =>
-        array.indexOf(value) === index
-    );
-
-  const filter =
-    selectedCategory === "All" ?
-      products :
-      products.filter(
+  const filterByPrice = (min, max) => {
+    setProducts(sourceProducts.filter((product) => product.price >= min && product.price <= max));
+  }
+  const filterByCategory = (selectedCategory) => {
+    setProducts(selectedCategory === "All" ?
+      sourceProducts :
+      sourceProducts.filter(
         (item) => item.category === selectedCategory
-      );
-
-  const filterByPrice = (min, max) =>
-    setProducts(originalProducts.filter((product) => product.price >= min && product.price <= max));
+      )
+    )
+  }
+  const reloadProducts = () => {
+    console.log("Reloading products");
+    setLoading(true);
+    fetchProducts();
+  }
+  const changeQuantities = (id, action) => {
+    let change = 0;
+    change = (action === "+") ? 1 : 0;
+    change = (action === "-" && cartProductsQuantities[id] !== 0) ? -1 : change;
+    const newQuantities = cartProductsQuantities.map((productQuantity, index) =>
+      index === id ? (productQuantity + change) : productQuantity
+    );
+    setInCartQuantity(
+      products
+        .map((product) => newQuantities[product.id - 1])
+        .reduce((partialSum, a) => partialSum + a, 0)
+    )
+    setTotalCartCost(
+      products
+        .map((product) => product.price * newQuantities[product.id - 1])
+        .reduce((partialSum, a) => partialSum + a, 0)
+    )
+    setCartProductsQuantities(newQuantities);
+  }
+  const clearCart = () => {
+    setCartProductsQuantities(sourceProducts.map((product) => 0));
+    setInCartQuantity(0);
+    setTotalCartCost(0);
+  }
+  const removeFromCart = (id) => {
+    const newQuantities = cartProductsQuantities.map((productQuantity, index) =>
+      index === id ? 0 : productQuantity
+    );
+    setInCartQuantity(
+      products
+        .map((product) => newQuantities[product.id - 1])
+        .reduce((partialSum, a) => partialSum + a, 0)
+    )
+    setTotalCartCost(
+      products
+        .map((product) => product.price * newQuantities[product.id - 1])
+        .reduce((partialSum, a) => partialSum + a, 0)
+    )
+    setCartProductsQuantities(newQuantities);
+  }
 
   return (
-    <CartContext.Provider value={{
-      renderToggle, setRenderToggle, products: originalProducts, setProducts: setOriginalProducts, cartProducts, setCartProducts, openCart, setOpenCart, inCart, total, loadFilters, setLoadFilters
-    }}>
-      <div className="App">
+    <BrowserRouter>
+      <CssBaseline />
+      <Context.Provider value={{ loading, products, cartProductsQuantities, changeQuantities, setOnMainPage, removeFromCart }}>
+        <Cart
+          products={products}
+          cartProductsQuantities={cartProductsQuantities}
+          inCartQuantity={inCartQuantity}
+          openCart={openCart}
+          setOpenCart={setOpenCart}
+          totalCartCost={totalCartCost}
+          clearCart={clearCart} />
         <Header
-          categories={categories}
-          setSelectedCategory={setSelectedCategory}
-          reloadProducts={fetchProducts}
-          loadFilters={!loading && loadFilters}
           loading={loading}
+          sourceProducts={sourceProducts}
+          reloadProducts={reloadProducts}
+          openCart={openCart}
+          setOpenCart={setOpenCart}
+          onMainPage={onMainPage}
+          setOnMainPage={setOnMainPage}
+          priceRange={priceRange}
           filterByPrice={filterByPrice}
-        />
-        <Routes>
-          <Route path={`/`} element={
-            !loading ?
-              <Products products={filter} /> :
-              <Loader />
-          } />
-          <Route path={`/products:id`} element={<ProductDetails />} />
-        </Routes>
-      </div>
-    </CartContext.Provider>
+          filterByCategory={filterByCategory} />
+        {
+          loading ? <Loader /> :
+            <Routes>
+              <Route path='/' element={<Shop products={products} />} />
+              <Route path='/products/:id' element={<ProductDetails products={sourceProducts} />} />
+            </Routes>
+        }
+      </Context.Provider>
+    </BrowserRouter>
   )
 }
 

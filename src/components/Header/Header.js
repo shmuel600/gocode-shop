@@ -1,111 +1,231 @@
+import HomeIcon from '@mui/icons-material/HomeRounded';
+import AdbIcon from '@mui/icons-material/LocalOffer';
+import MenuIcon from '@mui/icons-material/Menu';
+import Reload from '@mui/icons-material/RefreshRounded';
+import ToggleCart from '@mui/icons-material/ShoppingCartRounded';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
-import { useContext } from 'react';
-import { Link } from "react-router-dom";
-import CartContext from "../../contexts/CartContext";
-import Cart from '../Cart/Cart';
-import ToggleText from '../ToggleText/ToggleText';
-import './Header.css';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-// import Cart from '../Cart/Cart';
-
-
-const Header = ({ categories, setSelectedCategory, reloadProducts, loadFilters, loading, filterByPrice }) => {
-    const { renderToggle, products, openCart, setOpenCart, inCart, total, setLoadFilters } = useContext(CartContext);
-    const minPrice = Math.min(...products.map((product) => product.price));
-    const maxPrice = Math.max(...products.map((product) => product.price));
+const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProducts, openCart, setOpenCart, filterByPrice, filterByCategory, priceRange }) => {
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+    const categories = (
+        sourceProducts
+            .map(product => product.category)
+            .filter(
+                (value, index, array) =>
+                    array.indexOf(value) === index
+            )
+    );
+    let min, max;
+    if (!loading) {
+        [[min, max]] = [...priceRange];
+    }
+    else {
+        min = 1;
+        max = 1000;
+    }
 
     return (
         <>
-            {renderToggle && <></>}
-            {openCart && <Cart products={products} />}
-            <button
-                onClick={() => setOpenCart(!openCart)}
-                onMouseOver={(e) => {
-                    e.preventDefault();
-                    setOpenCart(true);
-                }}
-                className='cart-icon'
-            >
-                <div className="cart-image"></div>
-                <div className="cart-text">
-                    <h4>Total: ${total.toFixed(2)}</h4>
-                    <h4>In Cart: {inCart}</h4>
-                </div>
-            </button>
-            {/* <br /> */}
-            <div className='header'>
-                <nav className="product-filter">
-                    <h1>
-                        GoCode Shop
-                    </h1>
+            <AppBar position="static">
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters>
+                        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            href="/"
+                            sx={{
+                                mr: 2,
+                                display: { xs: 'none', md: 'flex' },
+                                fontFamily: 'monospace',
+                                fontWeight: 700,
+                                letterSpacing: '.3rem',
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}
+                        >
+                            GOCODE SHOP
+                        </Typography>
 
-                    {loadFilters &&
-                        <div>
-                            <div className="sort">
-                                <div className="collection-sort">
-                                    <label>Filter by:</label>
-                                    <select onChange={(event) => setSelectedCategory(event.target.value)}>
-                                        <option value="All">All Products</option>
-                                        {categories.map(
-                                            category =>
-                                                <option
-                                                    key={category}
-                                                    value={category}
-                                                >
-                                                    {category}
-                                                </option>
-                                        )}
-                                    </select>
-                                </div>
-                                <div className="collection-sort">
-                                    <label>Sort by:</label>
-                                    <select>
-                                        <option value="/">Featured</option>
-                                        <option value="/">Best Selling</option>
-                                        <option value="/">Alphabetically, A-Z</option>
-                                        <option value="/">Alphabetically, Z-A</option>
-                                        <option value="/">Price, low to high</option>
-                                        <option value="/">Price, high to low</option>
-                                        <option value="/">Date, new to old</option>
-                                        <option value="/">Date, old to new</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br />
-                            <div>
-                                <label>Price range:</label>
-                                {!loading && <Slider
-                                    className="slider"
-                                    getAriaLabel={() => 'Price range'}
-                                    defaultValue={[minPrice, maxPrice]}
-                                    onChange={(event) => {
-                                        filterByPrice(event.target.value[0], event.target.value[1]);
+                        {/* header */}
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginBottom: 0 }}>
+                            <Link to="/" style={{ textDecoration: 'none' }}>
+                                <Button
+                                    onClick={() => { handleCloseNavMenu(); setOnMainPage(true) }}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                        <HomeIcon />
+                                        Home
+                                    </Box>
+                                </Button>
+                            </Link>
+                            <Button
+                                onClick={() => { handleCloseNavMenu(); reloadProducts() }}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Reload />
+                                    Reload
+                                </Box>
+                            </Button>
+                            <Button
+                                onClick={() => { handleCloseNavMenu(); setOpenCart(!openCart) }}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <ToggleCart />
+                                    Cart
+                                </Box>
+                            </Button>
+                        </Box>
+
+                        {/* mobile: */}
+                        <>
+                            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' }, fontSize: 12, mr: 2 }}>
+                                <IconButton
+                                    size="small"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleOpenNavMenu}
+                                    color="inherit"
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorElNav}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
                                     }}
-                                    valueLabelDisplay="auto"
-                                    size='small'
-                                    min={minPrice}
-                                    max={maxPrice}
-                                />}
-                            </div>
-                        </div>
-                    }
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    }}
+                                    open={Boolean(anchorElNav)}
+                                    onClose={handleCloseNavMenu}
+                                    sx={{
+                                        display: { xs: 'block', md: 'none' },
+                                    }}
+                                >
+                                    <MenuItem onClick={() => { handleCloseNavMenu(); setOnMainPage(true) }}>
+                                        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                            <Typography textAlign="center">
+                                                Home
+                                            </Typography>
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={() => { handleCloseNavMenu(); reloadProducts() }}>
+                                        <Typography textAlign="center">
+                                            Reload
+                                        </Typography>
+                                    </MenuItem>
+                                </Menu>
+                            </Box>
+                            {
+                                !onMainPage &&
+                                <Box sx={{ display: 'flex', m: 2.2 }}>
+                                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => { handleCloseNavMenu(); setOnMainPage(true) }}>
+                                        <Typography
+                                            variant="h5"
+                                            noWrap
+                                            component="a"
+                                            sx={{
+                                                display: { xs: 'flex', md: 'none' },
+                                                flexGrow: 1,
+                                                fontSize: 20,
+                                                fontFamily: 'monospace',
+                                                fontWeight: 700,
+                                                letterSpacing: '.3rem',
+                                                color: 'inherit',
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            GOCODE SHOP
+                                        </Typography>
+                                    </Link>
+                                </Box>
+                            }
+                        </>
 
-                </nav>
-                {/* put buttons here to be inside */}
-            </div>
-            <hr />
-            <div className='menu'>
-                <Link to={`/`} className='header-btn'>
-                    <button className='header-btn' onClick={() => setLoadFilters(true)}>Home</button>
-                </Link>
-                <button onClick={reloadProducts} className='header-btn' >
-                    Reload Products
-                </button>
-                <ToggleText />
-            </div>
-            <hr />
+                        {/* filters and sorts */}
+                        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            {onMainPage && // filters and sorts
+                                (!loading &&
+                                    <>
+                                        <Typography sx={{ m: 2, color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>PRICE</Typography>
+                                        <Slider
+                                            getAriaLabel={() => 'Price range'}
+                                            defaultValue={[1, 1000]}
+                                            onChange={(event) => {
+                                                filterByPrice(event.target.value[0], event.target.value[1]);
+                                            }}
+                                            valueLabelDisplay="auto"
+                                            size='small'
+                                            min={min}
+                                            max={max}
+                                            // min={Math.min(...sourceProducts.map((product) => product.price))}
+                                            // max={Math.max(...sourceProducts.map((product) => product.price))}
+                                            sx={{ mr: 4, color: '#1653b4', maxWidth: 140 }}
+                                        />
+                                        <Typography id="demo-simple-select-standard-label" sx={{ color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>CATEGORY</Typography>
+                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} size="small">
+                                            <Select
+                                                sx={{ my: 1.5, color: 'whitesmoke', fontSize: 12 }}
+                                                // labelId="demo-simple-select-standard-label"
+                                                // id="demo-simple-select-standard"
+                                                onChange={(event) => filterByCategory(event.target.value)}
+                                                // label="Category"
+                                                value=""
+                                                size="small"
+                                            >
+                                                <MenuItem value="All">
+                                                    <em>All</em>
+                                                </MenuItem>
+                                                {categories.map((category) =>
+                                                    <MenuItem key={category} value={category}>{category}</MenuItem>
+                                                )}
+                                            </Select>
+                                        </FormControl>
+                                    </>
+                                )
+                            }
+                        </Box>
+
+                    </Toolbar>
+                </Container>
+            </AppBar >
+
+
         </>
-    );
+    )
 }
 
 export default Header;
+
+// <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
+// {/* <Link to="somewhere" style={{ textDecoration: 'none' }}>somewhere</Link> */ }

@@ -1,8 +1,10 @@
-import "./Loader.css";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
-const Loader = () =>
-    <div className="flex">
-        <div className="loader"></div>
-    </div>
-
-export default Loader;
+export default function CircularIndeterminate() {
+    return (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress sx={{ position: 'fixed', bottom: '50%' }} />
+        </Box>
+    );
+}
