@@ -188,18 +188,13 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
                                             size='small'
                                             min={min}
                                             max={max}
-                                            // min={Math.min(...sourceProducts.map((product) => product.price))}
-                                            // max={Math.max(...sourceProducts.map((product) => product.price))}
-                                            sx={{ mr: 4, color: '#1653b4', maxWidth: 140 }}
+                                            sx={{ mr: 4, color: '#1653b4', maxWidth: 140, minWidth: 120 }}
                                         />
                                         <Typography id="demo-simple-select-standard-label" sx={{ color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>CATEGORY</Typography>
-                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} size="small">
+                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 80, maxWidth: 120 }} size="small">
                                             <Select
                                                 sx={{ my: 1.5, color: 'whitesmoke', fontSize: 12 }}
-                                                // labelId="demo-simple-select-standard-label"
-                                                // id="demo-simple-select-standard"
                                                 onChange={(event) => filterByCategory(event.target.value)}
-                                                // label="Category"
                                                 value=""
                                                 size="small"
                                             >
@@ -226,6 +221,3 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
 }
 
 export default Header;
-
-// <Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
-// {/* <Link to="somewhere" style={{ textDecoration: 'none' }}>somewhere</Link> */ }
