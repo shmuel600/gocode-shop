@@ -188,10 +188,10 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
                                             size='small'
                                             min={min}
                                             max={max}
-                                            sx={{ mr: 4, color: '#1653b4', maxWidth: 140, minWidth: 40 }}
+                                            sx={{ mr: 4, color: '#1653b4', maxWidth: 100 }}
                                         />
                                         <Typography id="demo-simple-select-standard-label" sx={{ color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>CATEGORY</Typography>
-                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 40, maxWidth: 120 }} size="small">
+                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 40, width: 120, maxWidth: 120 }} size="small">
                                             <Select
                                                 sx={{ my: 1.5, color: 'whitesmoke', fontSize: 12 }}
                                                 onChange={(event) => filterByCategory(event.target.value)}
