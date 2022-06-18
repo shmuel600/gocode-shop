@@ -102,7 +102,7 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
 
                         {/* mobile: */}
                         <>
-                            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' }, fontSize: 12, mr: 2 }}>
+                            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' }, fontSize: 12, mr: 1 }}>
                                 <IconButton
                                     size="small"
                                     aria-label="account of current user"
@@ -177,7 +177,7 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
                             {onMainPage && // filters and sorts
                                 (!loading &&
                                     <>
-                                        <Typography sx={{ m: 2, color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>PRICE</Typography>
+                                        <Typography sx={{ ml: 1, mr: 2, color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>PRICE</Typography>
                                         <Slider
                                             getAriaLabel={() => 'Price range'}
                                             defaultValue={[1, 1000]}
@@ -188,10 +188,10 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
                                             size='small'
                                             min={min}
                                             max={max}
-                                            sx={{ mr: 4, color: '#1653b4', maxWidth: 100 }}
+                                            sx={{ mr: 3, color: '#1653b4', maxWidth: 120 }}
                                         />
                                         <Typography id="demo-simple-select-standard-label" sx={{ color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>CATEGORY</Typography>
-                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 40, width: 120, maxWidth: 120 }} size="small">
+                                        <FormControl variant="standard" sx={{ m: 1, minWidth: 70, width: 120, maxWidth: 120 }} size="small">
                                             <Select
                                                 sx={{ my: 1.5, color: 'whitesmoke', fontSize: 12 }}
                                                 onChange={(event) => filterByCategory(event.target.value)}
