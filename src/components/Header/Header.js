@@ -180,7 +180,7 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
                                         <Typography sx={{ ml: 1, mr: 2, color: 'whitesmoke', fontSize: 13, fontWeight: 500 }}>PRICE</Typography>
                                         <Slider
                                             getAriaLabel={() => 'Price range'}
-                                            defaultValue={[1, 1000]}
+                                            defaultValue={[min, max]}
                                             onChange={(event) => {
                                                 filterByPrice(event.target.value[0], event.target.value[1]);
                                             }}
