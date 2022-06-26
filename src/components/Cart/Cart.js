@@ -45,7 +45,7 @@ const Cart = ({ products, inCartQuantity, totalCartCost, cartProductsQuantities,
         <>
             <CartHandle open={openCart} onClick={() => setOpenCart(!openCart)}>
                 <Box style={{ display: 'flex', flexDirection: 'column' }}>
-                    <CartIcon sx={{ fontSize: 45, color: iconColor }} />
+                    <CartIcon sx={{ fontSize: 45, color: iconColor, cursor: 'pointer' }} />
                     {inCartQuantity > 0 &&
                         <Box sx={{
                             borderRadius: '50%',
@@ -92,7 +92,7 @@ const Cart = ({ products, inCartQuantity, totalCartCost, cartProductsQuantities,
                     <>
                         <Tooltip title="Close Cart">
                             <Box
-                                sx={{ position: 'fixed', bottom: 0, textAlign: 'center', width: drawerWidth / 2 }}
+                                sx={{ position: 'fixed', bottom: 0, textAlign: 'center', width: drawerWidth / 2, cursor: 'pointer' }}
                                 onMouseOver={() => setCloseHover(true)}
                                 onMouseLeave={() => setCloseHover(false)}
                                 onClick={() => { setOpenCart(false); setCloseHover(false) }}
@@ -108,7 +108,7 @@ const Cart = ({ products, inCartQuantity, totalCartCost, cartProductsQuantities,
                         </Tooltip>
                         <Tooltip title="Empty Cart">
                             <Box
-                                sx={{ position: 'fixed', bottom: 0, right: 0, textAlign: 'center', width: drawerWidth / 2 }}
+                                sx={{ position: 'fixed', bottom: 0, right: 0, textAlign: 'center', width: drawerWidth / 2, cursor: 'pointer' }}
                                 onMouseOver={() => setClearHover(true)}
                                 onMouseLeave={() => setClearHover(false)}
                                 onClick={() => clearCart()}

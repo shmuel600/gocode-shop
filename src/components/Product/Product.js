@@ -15,13 +15,15 @@ const Product = ({ product }) => {
     return (
         <>
             <Card sx={{ display: 'flex', alignItems: 'center', width: 400, height: 220, margin: '0.5%' }}>
-                <CardMedia
-                    component="img"
-                    height="140"
-                    sx={{ maxWidth: '30%', maxHeight: '170px', objectFit: 'contain', margin: '10px' }}
-                    image={product.image}
-                    alt=""
-                />
+                <Link to={`products/${product.id}`} style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none', minWidth: '30%', maxWidth: '30%', maxHeight: '170px', margin: '10px' }} onClick={() => setOnMainPage(false)}>
+                    <CardMedia
+                        component="img"
+                        height="140"
+                        sx={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                        image={product.image}
+                        alt=""
+                    />
+                </Link>
                 <Box sx={{ display: 'flex', flexDirection: 'column', width: 260, height: 220, backgroundColor: '#eeeeee' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="subtitle2">

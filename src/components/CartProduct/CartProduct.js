@@ -45,7 +45,7 @@ const CartProduct = ({ product, quantity }) => {
                                 <RemoveProduct />
                             </Box>
                             :
-                            <Box sx={{ maxWidth: 25, height: 25, color: '#1976d2' }}>
+                            <Box sx={{ maxWidth: 25, height: 25, color: '#1976d2', cursor: 'pointer' }}>
                                 <RemoveProductAction />
                             </Box>
                     }
