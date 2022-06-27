@@ -11,9 +11,9 @@ import { Link, useParams } from "react-router-dom";
 import Loader from '../../components/Loader/Loader';
 import Context from "../../contexts/Context";
 
-const ProductDetails = ({ products, loading }) => {
+const ProductDetails = ({ loading, length, getProductId }) => {
     const { id } = useParams();
-    const [product, setProduct] = useState(products[id - 1]);
+    const [product, setProduct] = useState([]);
     const { cartProductsQuantities, changeQuantities } = useContext(Context);
     fetch(`/api/products/${id}`)
         .then((content) => content.json())
@@ -68,12 +68,12 @@ const ProductDetails = ({ products, loading }) => {
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', pl: 1, pb: 1, maxWidth: '50%' }}>
                                 <ButtonGroup variant="contained" aria-label="outlined primary button group" sx={{ m: 1 }}>
                                     <Button sx={{ p: 0, m: 0 }}>
-                                        <Link to={`/products/${product.id > 1 ? product.id - 1 : product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <Link to={`/products/${product.id > 1 ? getProductId(product.id - 1) : product._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                             <Button>Previous</Button>
                                         </Link>
                                     </Button>
                                     <Button sx={{ p: 0, m: 0 }}>
-                                        <Link to={`/products/${product.id < products.length ? product.id + 1 : product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <Link to={`/products/${product.id < length ? getProductId(product.id + 1) : product._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                             <Button>Next</Button>
                                         </Link>
                                     </Button>
