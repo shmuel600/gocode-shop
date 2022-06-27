@@ -52,7 +52,7 @@ app.get("/api/products/:id", (request, response) => { //return a specific produc
         .catch((error) => console.log(error));
 })
 app.post("/api/products", (request, response) => {  //create a new product
-    const { title, price, description, category, image } = request.body;
+    const { title, price, description, category, image, rate, count } = request.body;
     Product
         .find()
         .then((products) => {
@@ -67,8 +67,8 @@ app.post("/api/products", (request, response) => {  //create a new product
                     category,
                     image,
                     rating: {
-                        rate: 0,
-                        count: 0
+                        rate,
+                        count
                     }
                 }])
                 .then((product) => response.send(product))
@@ -94,8 +94,7 @@ app.get('*', (request, response) => { //direct other requests to client
     response.sendFile(__dirname + '/client/build/index.html');
 });
 
-mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`)
-    .then(() => {
-        console.log(`Listening on port ${PORT}`)
-        app.listen(PORT)
-    });
+mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`).then(() => {
+    console.log(`Listening on port ${PORT}`)
+    app.listen(PORT)
+});
