@@ -24,7 +24,7 @@ const App = () => {
     fetchProducts();
   }, []);
   const fetchProducts = () => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("/api/products")
       .then((content) => content.json())
       .then((fetchedProducts) => {
         setPriceRange([[
@@ -37,38 +37,8 @@ const App = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.log("Server unavailable, trying second server");
-        fetch("https://gocode-bituach-yashir.glitch.me/products")
-          .then((content) => content.json())
-          .then((fetchedProducts) => {
-            setPriceRange([[
-              Math.min(...fetchedProducts.map((product) => product.price)),
-              Math.max(...fetchedProducts.map((product) => product.price))
-            ]]);
-            setCartProductsQuantities(fetchedProducts.map((product) => 0));
-            setSourceProducts(fetchedProducts);
-            setProducts(fetchedProducts);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.log("Server unavailable, trying third server");
-            fetch("https://bedecked-stone-turret.glitch.me/products")
-              .then((content) => content.json())
-              .then((fetchedProducts) => {
-                setPriceRange([[
-                  Math.min(...fetchedProducts.map((product) => product.price)),
-                  Math.max(...fetchedProducts.map((product) => product.price))
-                ]]);
-                setCartProductsQuantities(fetchedProducts.map((product) => 0));
-                setSourceProducts(fetchedProducts);
-                setProducts(fetchedProducts);
-                setLoading(false);
-              })
-              .catch((error) => {
-                console.log("Server unavailable, try again later");
-              })
-          });
-      });
+        console.log("Server unavailable, try again later");
+      })
   }
   const filterByPrice = (min, max) => {
     setProducts(sourceProducts.filter((product) => product.price >= min && product.price <= max));

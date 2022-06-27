@@ -11,7 +11,6 @@ import Context from '../../contexts/Context';
 
 const Product = ({ product }) => {
     const { cartProductsQuantities, changeQuantities, setOnMainPage } = useContext(Context);
-
     return (
         <>
             <Card sx={{ display: 'flex', alignItems: 'center', width: 400, height: 220, margin: '0.5%' }}>

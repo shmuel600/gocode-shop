@@ -35,7 +35,7 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
             )
     );
     let min, max;
-    if (!loading) {
+    if (!loading && priceRange[0] > 0) {
         [[min, max]] = [...priceRange];
     }
     else {
@@ -214,8 +214,6 @@ const Header = ({ loading, onMainPage, setOnMainPage, sourceProducts, reloadProd
                     </Toolbar>
                 </Container>
             </AppBar >
-
-
         </>
     )
 }
