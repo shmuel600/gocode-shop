@@ -124,7 +124,7 @@ const App = () => {
           loading ? <Loader /> :
             <Routes>
               <Route path='/' element={<Shop products={products} />} />
-              <Route path='/products/:id' element={<ProductDetails products={sourceProducts} />} />
+              <Route path='/products/:id' element={<ProductDetails products={sourceProducts} loading={loading} />} />
             </Routes>
         }
       </Context.Provider>
