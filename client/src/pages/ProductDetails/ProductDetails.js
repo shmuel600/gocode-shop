@@ -48,7 +48,7 @@ const ProductDetails = ({ loading, length, getProductId }) => {
 
                         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '30vh' }}>
                             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', minHeight: '20vh' }}>
-                                <Typography variant="subtitle3" color="text.secondary" component="div">
+                                {/* <Typography variant="subtitle3" color="text.secondary" component="div">
                                     Rating: {product.rating.rate}/5
                                     <br />
                                     {product.rating.count} users have voted
@@ -60,7 +60,7 @@ const ProductDetails = ({ loading, length, getProductId }) => {
                                 // onChange={(event, newValue) => {
                                 //     setRating(newValue);
                                 // }}
-                                />
+                                /> */}
                                 <Typography component="div" variant="subtitle1" fontSize='24px'>
                                     ₪{product.price}
                                 </Typography>
