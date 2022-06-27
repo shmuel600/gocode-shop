@@ -52,7 +52,7 @@ app.get("/api/products/:id", (request, response) => { //return a specific produc
         .catch((error) => console.log(error));
 })
 app.post("/api/products", (request, response) => {  //create a new product
-    const { title, price, description, category, image, rate, count } = request.body;
+    const { title, price, description, category, image } = request.body;
     Product
         .find()
         .then((products) => {
@@ -67,8 +67,8 @@ app.post("/api/products", (request, response) => {  //create a new product
                     category,
                     image,
                     rating: {
-                        rate,
-                        count
+                        rate: 0,
+                        count: 0
                     }
                 }])
                 .then((product) => response.send(product))
