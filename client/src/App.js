@@ -96,9 +96,6 @@ const App = () => {
     )
     setCartProductsQuantities(newQuantities);
   }
-  const getProductId = (id) => {
-    return sourceProducts.filter((product) => product.id === id)._id;
-  }
 
   return (
     <BrowserRouter>
@@ -127,7 +124,7 @@ const App = () => {
           loading ? <Loader /> :
             <Routes>
               <Route path='/' element={<Shop products={products} />} />
-              <Route path='/products/:id' element={<ProductDetails loading={loading} length={sourceProducts.length} getProductId={getProductId} />} />
+              <Route path='/products/:id' element={<ProductDetails products={sourceProducts} />} />
             </Routes>
         }
       </Context.Provider>
