@@ -13,15 +13,8 @@ import Rating from '@mui/material/Rating';
 
 const ProductDetails = ({ products }) => {
     const { id } = useParams();
-    const [product, setProduct] = useState(products.filter((product) => product._id === id));
-    const [nextProduct, setNextProduct] = useState(product.id < products.length ? products.filter((p) => p.id === product.id + 1) : product);
-    const [previousProduct, setPreviousProduct] = useState(product.id - 1 > 0 ? products.filter((p) => p.id === product.id - 1) : product)
+    const [product, setProduct] = useState(products[id - 1]);
     const { cartProductsQuantities, changeQuantities } = useContext(Context);
-    useEffect(() => {
-        setNextProduct(product.id < products.length ? products.filter((p) => p.id === product.id + 1) : product);
-        setPreviousProduct(product.id - 1 > 0 ? products.filter((p) => p.id === product.id - 1) : product);
-    }, [product, products])
-
     return (
         <>
             <Card sx={{ display: 'flex' }}>
@@ -66,14 +59,14 @@ const ProductDetails = ({ products }) => {
                         </Box>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', pl: 1, pb: 1, maxWidth: '50%' }}>
                             <ButtonGroup variant="contained" aria-label="outlined primary button group" sx={{ m: 1 }}>
-                                <Button sx={{ p: 0, m: 0 }}>
-                                    <Link to={`/products/${previousProduct._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <Button onClick={() => product.id - 1 > 0 && setProduct(previousProduct)}>Previous</Button>
+                                <Button sx={{ p: 0 }}>
+                                    <Link onClick={() => product.id - 1 > 0 && setProduct(products[product.id - 2])} to={`/products/${product.id > 1 ? product.id - 1 : product.id}`} style={{ margin: 0, paddingTop: 6, paddingBottom: 6, paddingLeft: 18, paddingRight: 18, textDecoration: 'none', color: 'whitesmoke' }}>
+                                        Previous
                                     </Link>
                                 </Button>
-                                <Button sx={{ p: 0, m: 0 }}>
-                                    <Link to={`/products/${nextProduct._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <Button onClick={() => product.id < products.length && setProduct(nextProduct)}>Next</Button>
+                                <Button sx={{ p: 0 }}>
+                                    <Link onClick={() => product.id < products.length && setProduct(products[product.id])} to={`/products/${product.id < products.length ? product.id + 1 : product.id}`} style={{ margin: 0, paddingTop: 6, paddingBottom: 6, paddingLeft: 18, paddingRight: 18, textDecoration: 'none', color: 'whitesmoke' }}>
+                                        Next
                                     </Link>
                                 </Button>
                             </ButtonGroup>

@@ -6,7 +6,7 @@ const Shop = ({ products }) => {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', padding: '3% 9%', backgroundColor: 'transparent' }}>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
                 {products.map((product) =>
-                    <Product key={product._id} product={product} style={{ display: 'flex', flexWrap: 'wrap' }} />
+                    <Product key={product.id} product={product} style={{ display: 'flex', flexWrap: 'wrap' }} />
                 )}
             </Box>
         </Box>

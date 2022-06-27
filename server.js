@@ -12,7 +12,7 @@ const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
 const PORT = process.env.PORT || 8000;
 
 const Product = mongoose.model("Product", {
-    id: Number,
+    _id: Number,
     title: String,
     price: Number,
     description: String,
@@ -60,7 +60,7 @@ app.post("/api/products", (request, response) => {  //create a new product
             const id = maxId >= 0 ? (maxId + 1) : 1;
             Product
                 .insertMany([{
-                    id,
+                    _id: id,
                     title,
                     price,
                     description,

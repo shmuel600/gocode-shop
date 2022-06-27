@@ -14,7 +14,7 @@ const Product = ({ product }) => {
     return (
         <>
             <Card sx={{ display: 'flex', alignItems: 'center', width: 400, height: 220, margin: '0.5%' }}>
-                <Link to={`products/${product._id}`} style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none', minWidth: '30%', maxWidth: '30%', maxHeight: '170px', margin: '10px' }} onClick={() => setOnMainPage(false)}>
+                <Link to={`products/${product.id}`} style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none', minWidth: '30%', maxWidth: '30%', maxHeight: '170px', margin: '10px' }} onClick={() => setOnMainPage(false)}>
                     <CardMedia
                         component="img"
                         height="140"
