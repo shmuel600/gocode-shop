@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import Header from './components/Header/Header';
 import Loader from './components/Loader/Loader';
-import ProductDetails from './components/ProductDetails/ProductDetails';
-import Shop from './components/Shop/Shop';
+import ProductDetails from './pages/ProductDetails/ProductDetails';
+import Shop from './pages/Shop/Shop';
 import Context from './contexts/Context';
 import './App.css';
 

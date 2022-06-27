@@ -1,4 +1,4 @@
-import Product from "../Product/Product";
+import Product from "../../components/Product/Product";
 import { Box } from "@mui/system";
 
 const Shop = ({ products }) => {
